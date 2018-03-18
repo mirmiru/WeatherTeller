@@ -13,6 +13,7 @@
 		A5722FF1205AB08E007E910D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5722FEF205AB08E007E910D /* Main.storyboard */; };
 		A5722FF3205AB08E007E910D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5722FF2205AB08E007E910D /* Assets.xcassets */; };
 		A5722FF6205AB08E007E910D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5722FF4205AB08E007E910D /* LaunchScreen.storyboard */; };
+		A5CA8988205E9D23004A8DAD /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CA8987205E9D23004A8DAD /* SearchTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		A5722FF2205AB08E007E910D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5722FF5205AB08E007E910D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5722FF7205AB08E007E910D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5CA8987205E9D23004A8DAD /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				A5722FF4205AB08E007E910D /* LaunchScreen.storyboard */,
 				A5722FF7205AB08E007E910D /* Info.plist */,
 				A542AAFC205D9AF700742249 /* MainTableViewCell.swift */,
+				A5CA8987205E9D23004A8DAD /* SearchTableViewController.swift */,
 			);
 			path = WeatherTeller;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 				A5722FEC205AB08E007E910D /* AppDelegate.swift in Sources */,
 				A542AAFD205D9AF700742249 /* MainTableViewCell.swift in Sources */,
 				A542AAFB205D981F00742249 /* WeatherTellerUiViewController.swift in Sources */,
+				A5CA8988205E9D23004A8DAD /* SearchTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
