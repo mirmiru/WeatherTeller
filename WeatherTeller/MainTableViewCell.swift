@@ -15,6 +15,12 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var labelWeather: UILabel!
     @IBOutlet weak var labelDegrees: UILabel!
     
+    func setLocationInfo(location: Location) {
+        labelLocation.text = location.title
+        imageIcon.image = location.weatherIcon
+        labelWeather.text = location.weatherExplanation
+        labelDegrees.text = String(location.degrees)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,7 +29,6 @@ class MainTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
