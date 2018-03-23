@@ -8,18 +8,25 @@
 
 import UIKit
 
-class SearchTableViewController: UITableViewController {
+class SearchTableViewController: UITableViewController, UISearchResultsUpdating {
 
     var cities = ["Helsinki", "London", "Lund", "Gothenburg", "Malmö", "Hiroshima"]
+    var searchController : UISearchController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        definesPresentationContext = true
+        
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        
+        navigationItem.searchController = searchController
+    }
+    
+    //Anropas när vi skriver i search controllern
+    func updateSearchResults(for searchController: UISearchController) {
+        print("Text = \(searchController.searchBar.text)")
     }
 
     override func didReceiveMemoryWarning() {

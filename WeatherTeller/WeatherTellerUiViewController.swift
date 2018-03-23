@@ -11,7 +11,7 @@ import UIKit
 
 class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     var locations : [Location] = []
     //var locationsToDisplay : [Location] = []
@@ -27,8 +27,8 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
     func createArray() -> [Location] {
         var tempLocations: [Location] = []
         
-        let loc1 = Location(weatherIcon: #imageLiteral(resourceName: "sun"), title: "Gothenburg", weatherExplanation: "Sunny", degrees: "19\u{00B0}")
-        let loc2 = Location(weatherIcon: #imageLiteral(resourceName: "sun"), title: "Helsinki", weatherExplanation: "Sunny", degrees: "15°")
+        let loc1 = Location(weatherIcon: #imageLiteral(resourceName: "sun"), title: "Gothenburg", degrees: "19\u{00B0}")
+        let loc2 = Location(weatherIcon: #imageLiteral(resourceName: "sun"), title: "Helsinki", degrees: "15°")
         
         tempLocations.append(loc1)
         tempLocations.append(loc2)
@@ -68,7 +68,6 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
         return cell
     }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
