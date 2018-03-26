@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct Location : Codable {
+    let id: Int
+    let name: String
+}
+
 class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var textField: UITextField!
@@ -18,7 +23,22 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
+        //JSON
+        
+        let path = Bundle.main.path(forResource: "CityList", ofType: "json")
+        let url = URL(fileURLWithPath: path!)
+        do {
+            let data = try Data(contentsOf: url)
+            let cities = try JSONDecoder().decode([Location].self, from: data)
+            print(cities)
+        } catch {
+            print("Error parsing.")
+        }
+        
+        //END JSON
+        
         textField.delegate = self
         tableView.delegate = self
     }
