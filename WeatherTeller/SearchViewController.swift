@@ -1,5 +1,5 @@
 //
-//  SearchTableViewController.swift
+//  SearchViewController.swift
 //  WeatherTeller
 //
 //  Created by Milja V on 2018-03-25.
@@ -8,37 +8,32 @@
 
 import UIKit
 
-class SearchTableViewController: UITableViewController, UISearchResultsUpdating {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var city = ["Helsinki", "Gothenburg", "Lund", "Malmö", "Malund"]
-    var searchResult : [String] = []
-    var searchController : UISearchController!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchField: UITextField!
+    
+    var temp : [String] = ["Example1", "Example2", "Example3"]
+    var results : [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        definesPresentationContext = true
-        
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        navigationItem.searchController = searchController
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
-    func updateSearchResults(for searchController: UISearchController) {
-        if let text = searchController.searchBar.text?.lowercased() {
-            //Sök i API - skicka in text som argument
-            getWeather()
-        } else {
-            searchResult = []
-        }
-    }
-    
-    func getWeather() {
+    //MARK: - Search Function
+    @IBAction func search(_ sender: Any) {
+        print("Button clicked")
         if let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=Lund&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
             let request = URLRequest(url: url)
             let task = URLSession.shared.dataTask(with: request, completionHandler:
             { (data : Data?, response : URLResponse?, error : Error?) in
-                //print("Got response from server.")
-                
+                //print("Got response.")
                 if let actualError = error {
                     print(actualError)
                 } else {
@@ -50,9 +45,13 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
                             
                             if let dict = parsed as? [String: AnyObject] {
                                 if let main = dict["main"] {
-                                    print(main)
+                                    if let temperature = main["temp"] {
+                                        print(temperature)
+                                    } else {
+                                        print("No temp key found")
+                                    }
                                 } else {
-                                    print("Can't find main key.")
+                                    print("Can't find main.")
                                 }
                             } else {
                                 print("Can't create dict.")
@@ -66,30 +65,25 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
                 }
             })
             task.resume()
-            print("Sending request")
+            print("Sending request.")
         } else {
-            print("Bad url string")
+            print("Bad url.")
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    
+    //MARK: - TableView
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return city.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return results.count
     }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
-        cell.textLabel?.text = city[indexPath.row]
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "lookUpCell", for: indexPath) as! SearchTableViewCell
+        cell.locationName.text = results[indexPath.row]
         return cell
     }
 

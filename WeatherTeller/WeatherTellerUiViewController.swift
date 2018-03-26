@@ -13,7 +13,7 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
 
     @IBOutlet weak var tableView: UITableView!
     
-    var locations : [Location] = []
+    var locations : [Weather] = []
     //var locationsToDisplay : [Location] = []
     
     override func viewDidLoad() {
@@ -24,14 +24,14 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     //DUMMY DATA
-    func createArray() -> [Location] {
-        var tempLocations: [Location] = []
+    func createArray() -> [Weather] {
+        var tempLocations: [Weather] = []
         
-        let loc1 = Location(weatherIcon: #imageLiteral(resourceName: "sun"), title: "Gothenburg", degrees: "19\u{00B0}")
-        let loc2 = Location(weatherIcon: #imageLiteral(resourceName: "sun"), title: "Helsinki", degrees: "15°")
+       // let loc1 = Location(weatherIcon: #imageLiteral(resourceName: "sun"), title: "Gothenburg", degrees: "19\u{00B0}")
+       // let loc2 = Location(weatherIcon: #imageLiteral(resourceName: "sun"), title: "Helsinki", degrees: "15°")
         
-        tempLocations.append(loc1)
-        tempLocations.append(loc2)
+        //tempLocations.append(loc1)
+        //tempLocations.append(loc2)
         
         return tempLocations
     }

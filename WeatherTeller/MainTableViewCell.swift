@@ -14,9 +14,9 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var imageIcon: UIImageView!
     @IBOutlet weak var labelDegrees: UILabel!
     
-    func setLocationInfo(location: Location) {
+    func setLocationInfo(location: Weather) {
         labelLocation.text = location.title
-        labelDegrees.text = String(location.degrees)
+        labelDegrees.text = String(location.temperature)
     }
     
     override func awakeFromNib() {
