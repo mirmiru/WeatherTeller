@@ -70,7 +70,7 @@
                                         <connections>
                                             <outlet property="labelDegrees" destination="yRX-tM-TMA" id="CWM-Ha-Xxd"/>
                                             <outlet property="labelLocation" destination="GbM-dc-TOt" id="ayw-Sa-gMe"/>
-                                            <segue destination="zcd-Ab-lk8" kind="show" identifier="detailedSegue" id="iDX-vi-eDy"/>
+                                            <segue destination="zcd-Ab-lk8" kind="show" identifier="favoriteSegue" id="iDX-vi-eDy"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -116,10 +116,10 @@
             </objects>
             <point key="canvasLocation" x="1000.8" y="821.73913043478262"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="9T1-eT-cYG">
             <objects>
-                <viewController id="zcd-Ab-lk8" sceneMemberID="viewController">
+                <viewController id="zcd-Ab-lk8" customClass="DetailViewController" customModule="WeatherTeller" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S8i-Nd-YdE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -226,6 +226,17 @@
                         <viewLayoutGuide key="safeArea" id="WCm-tv-QVp"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="iconTextView" destination="MY7-sq-Tue" id="kgr-AW-3Sa"/>
+                        <outlet property="locationLabel" destination="ay8-F4-K0y" id="cSH-lV-Pjs"/>
+                        <outlet property="mittenIcon" destination="ZIA-ld-LeC" id="G5e-4i-g8C"/>
+                        <outlet property="realfeelLabel" destination="Q2y-qb-zYy" id="tMf-iE-dDX"/>
+                        <outlet property="shirtIcon" destination="sTX-8j-2eY" id="HQh-b2-RXN"/>
+                        <outlet property="temperatureLabel" destination="50G-PG-fck" id="4GZ-54-Yc5"/>
+                        <outlet property="umbrellaIcon" destination="KL0-nX-azJ" id="9wQ-aI-jLt"/>
+                        <outlet property="uvIcon" destination="jYG-nq-DMJ" id="v78-kR-aGh"/>
+                        <outlet property="windLabel" destination="snd-9F-Fn0" id="gLh-cZ-E6l"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lUp-jc-o6Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -369,6 +380,7 @@
                                         <connections>
                                             <outlet property="locationLabel" destination="7Wi-XK-HOs" id="DCR-ca-Z0A"/>
                                             <outlet property="temperatureLabel" destination="24H-W5-2OC" id="HjK-dG-8df"/>
+                                            <segue destination="zcd-Ab-lk8" kind="show" identifier="detailSegue" id="AbY-SJ-dyp"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -448,4 +460,7 @@
         <image name="umbrellaLight" width="50" height="50"/>
         <image name="wt_image" width="375" height="344"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="AbY-SJ-dyp"/>
+    </inferredMetricsTieBreakers>
 </document>

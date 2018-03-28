@@ -8,6 +8,7 @@
 
 import UIKit
 
+/*
 struct Weather : Codable {
     let main: String
     let description: String
@@ -34,6 +35,7 @@ struct LocationResponse : Codable {
     let id: Int
     let name: String
 }
+*/
 
 struct MultipleLocations : Codable {
     let list: [LocationResponse]
@@ -48,6 +50,7 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     var noLocations : [String] = []
     //var allCities = [Location]()
     
+    var localWeather : LocationResponse?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,14 +124,20 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
         //tableView.reloadData()
     }
 
-    /*
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "detailSegue", sender: self)
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let destination = segue.destination as? DetailViewController {
+            destination.localWeather = foundLocations[(tableView.indexPathForSelectedRow?.row)!]
+        }
     }
-    */
+    
 
 }
