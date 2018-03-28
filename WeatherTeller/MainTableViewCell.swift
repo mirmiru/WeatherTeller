@@ -15,8 +15,8 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var labelDegrees: UILabel!
     
     func setLocationInfo(location: Weather) {
-        labelLocation.text = location.title
-        labelDegrees.text = String(location.temperature)
+        //labelLocation.text = location.title
+        //labelDegrees.text = String(location.temperature)
     }
     
     override func awakeFromNib() {

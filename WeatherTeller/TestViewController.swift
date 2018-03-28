@@ -8,9 +8,35 @@
 
 import UIKit
 
-struct Location : Codable {
+struct Weather : Codable {
+    let main: String
+    let description: String
+    let icon: String
+}
+
+struct Main : Codable {
+    let temp: Double
+}
+
+struct Wind : Codable {
+    let speed: Double
+}
+
+struct Sys : Codable {
+    let country: String
+}
+
+struct LocationResponse : Codable {
+    let weather: [Weather]
+    let main: Main
+    let wind: Wind
+    let sys: Sys
     let id: Int
     let name: String
+}
+
+struct MultipleLocations : Codable {
+    let list: [LocationResponse]
 }
 
 class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
@@ -18,74 +44,81 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
-    var autoCompletePossibilities = ["Wand", "Wizard", "Test"]
-    var autoComplete : [String] = []
+    var foundLocations : [LocationResponse] = []
+    var noLocations : [String] = []
+    //var allCities = [Location]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        //JSON
-        
-        let path = Bundle.main.path(forResource: "CityList", ofType: "json")
-        let url = URL(fileURLWithPath: path!)
-        do {
-            let data = try Data(contentsOf: url)
-            let cities = try JSONDecoder().decode([Location].self, from: data)
-            print(cities)
-        } catch {
-            print("Error parsing.")
-        }
-        
-        //END JSON
-        
         textField.delegate = self
         tableView.delegate = self
     }
-
+    
+    // JSON QUERY
+    //On Search button press
+    @IBAction func lookUpLocation(_ sender: Any) {
+        if let safeString = textField.text!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+            //let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(safeString)&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
+            let url = URL(string: "http://api.openweathermap.org/data/2.5/find?q=\(safeString)&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
+            let request = URLRequest(url: url)
+            let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, reponse: URLResponse?, error: Error?) in
+                if let actualError = error {
+                    print("Error: \(actualError).")
+                } else {
+                    if let actualData = data {
+                        
+                        let decoder = JSONDecoder()
+                        do {
+                            let weatherResponse = try decoder.decode(MultipleLocations.self, from: actualData)
+                            //TEST
+                            print(weatherResponse)
+                            print("--------------")
+                            print(weatherResponse.list[0].id)
+                            //END TEST
+                            for location in weatherResponse.list {
+                                self.foundLocations.append(location)
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
+                            }
+                        } catch let error {
+                            print("Error parsing JSON: \(error)")
+                        }
+                        
+                    } else {
+                        print("No data received.")
+                    }
+                }
+            })
+            task.resume()
+        } else {
+            print("Bad URL string.")
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    //MARK: - Textfield
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        let subString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-        
-        searchAutocompleteEntriesWithSubstring(subString: subString)
-        
-        return true
-    }
-    
-    func searchAutocompleteEntriesWithSubstring(subString: String) {
-        autoComplete.removeAll(keepingCapacity: false)
-        for key in autoCompletePossibilities {
-            let myString:NSString! = key as NSString
-            let substringRange : NSRange! = myString.range(of: subString)
-            if (substringRange.location == 0) {
-                autoComplete.append(key)
-            }
-        }
-        tableView.reloadData()
     }
     
     //MARK: - Tableview
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath) as UITableViewCell
-        cell.textLabel?.text = autoComplete[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath) as! TestTableViewCell
+        cell.locationLabel.text = "\(foundLocations[indexPath.row].name), \(foundLocations[indexPath.row].sys.country)"
+        cell.temperatureLabel.text = "\(foundLocations[indexPath.row].main.temp) ℃"
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return autoComplete.count
+        return foundLocations.count
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selection: UITableViewCell = tableView.cellForRow(at: indexPath)!
         textField.text = selection.textLabel!.text
+        //tableView.reloadData()
     }
 
     /*

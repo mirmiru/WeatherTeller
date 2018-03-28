@@ -23,6 +23,10 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
         tableView.reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isTranslucent = true
+    }
+    
     //DUMMY DATA
     func createArray() -> [Weather] {
         var tempLocations: [Weather] = []

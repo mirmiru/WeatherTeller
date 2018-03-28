@@ -33,7 +33,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     }
     
     func getWeather() {
-        if let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=Lund&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
+        if let url = URL(string: "http://api.openweathermap.org/data/2.5/forecast/daily?q=London&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
             let request = URLRequest(url: url)
             let task = URLSession.shared.dataTask(with: request, completionHandler:
             { (data : Data?, response : URLResponse?, error : Error?) in
