@@ -15,11 +15,12 @@
 		A5722FF6205AB08E007E910D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5722FF4205AB08E007E910D /* LaunchScreen.storyboard */; };
 		A58695C9206BFAD900A011AF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58695C8206BFAD900A011AF /* DetailViewController.swift */; };
 		A58695CB206C04B300A011AF /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58695CA206C04B300A011AF /* WeatherData.swift */; };
+		A596D5932074E03B00E47675 /* SavedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A596D5922074E03B00E47675 /* SavedData.swift */; };
 		A5A049F52067A6340027F49C /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A049F42067A6340027F49C /* SearchTableViewController.swift */; };
-		A5A049F72067CB330027F49C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A049F62067CB330027F49C /* SearchViewController.swift */; };
 		A5A049FB2067CE1E0027F49C /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A049FA2067CE1E0027F49C /* SearchTableViewCell.swift */; };
 		A5A049FF2068E0250027F49C /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A049FE2068E0250027F49C /* TestViewController.swift */; };
 		A5C45926206ABBEC0076A318 /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C45925206ABBEC0076A318 /* TestTableViewCell.swift */; };
+		A5C6D84A207677BA00F2931E /* ClothingRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D849207677BA00F2931E /* ClothingRec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,11 +34,12 @@
 		A5722FF7205AB08E007E910D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A58695C8206BFAD900A011AF /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A58695CA206C04B300A011AF /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		A596D5922074E03B00E47675 /* SavedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedData.swift; sourceTree = "<group>"; };
 		A5A049F42067A6340027F49C /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
-		A5A049F62067CB330027F49C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A5A049FA2067CE1E0027F49C /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		A5A049FE2068E0250027F49C /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		A5C45925206ABBEC0076A318 /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
+		A5C6D849207677BA00F2931E /* ClothingRec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingRec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,18 +74,19 @@
 			children = (
 				A5722FEB205AB08E007E910D /* AppDelegate.swift */,
 				A542AAFA205D981F00742249 /* WeatherTellerUiViewController.swift */,
+				A542AAFC205D9AF700742249 /* MainTableViewCell.swift */,
 				A5A049F42067A6340027F49C /* SearchTableViewController.swift */,
 				A5A049FA2067CE1E0027F49C /* SearchTableViewCell.swift */,
 				A5722FEF205AB08E007E910D /* Main.storyboard */,
 				A5722FF2205AB08E007E910D /* Assets.xcassets */,
 				A5722FF4205AB08E007E910D /* LaunchScreen.storyboard */,
-				A542AAFC205D9AF700742249 /* MainTableViewCell.swift */,
-				A5A049F62067CB330027F49C /* SearchViewController.swift */,
 				A5722FF7205AB08E007E910D /* Info.plist */,
 				A5A049FE2068E0250027F49C /* TestViewController.swift */,
 				A5C45925206ABBEC0076A318 /* TestTableViewCell.swift */,
 				A58695CA206C04B300A011AF /* WeatherData.swift */,
 				A58695C8206BFAD900A011AF /* DetailViewController.swift */,
+				A596D5922074E03B00E47675 /* SavedData.swift */,
+				A5C6D849207677BA00F2931E /* ClothingRec.swift */,
 			);
 			path = WeatherTeller;
 			sourceTree = "<group>";
@@ -161,14 +164,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A58695C9206BFAD900A011AF /* DetailViewController.swift in Sources */,
-				A5A049F72067CB330027F49C /* SearchViewController.swift in Sources */,
 				A5722FEC205AB08E007E910D /* AppDelegate.swift in Sources */,
 				A5A049FF2068E0250027F49C /* TestViewController.swift in Sources */,
 				A5A049F52067A6340027F49C /* SearchTableViewController.swift in Sources */,
 				A542AAFD205D9AF700742249 /* MainTableViewCell.swift in Sources */,
 				A58695CB206C04B300A011AF /* WeatherData.swift in Sources */,
 				A5C45926206ABBEC0076A318 /* TestTableViewCell.swift in Sources */,
+				A596D5932074E03B00E47675 /* SavedData.swift in Sources */,
 				A542AAFB205D981F00742249 /* WeatherTellerUiViewController.swift in Sources */,
+				A5C6D84A207677BA00F2931E /* ClothingRec.swift in Sources */,
 				A5A049FB2067CE1E0027F49C /* SearchTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

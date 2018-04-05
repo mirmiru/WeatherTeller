@@ -10,9 +10,9 @@ import UIKit
 
 class MainTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var labelLocation: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var imageIcon: UIImageView!
-    @IBOutlet weak var labelDegrees: UILabel!
+    @IBOutlet weak var degreesLabel: UILabel!
     
     func setLocationInfo(location: Weather) {
         //labelLocation.text = location.title

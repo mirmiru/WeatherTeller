@@ -37,9 +37,11 @@ struct LocationResponse : Codable {
 }
 */
 
+/*
 struct MultipleLocations : Codable {
     let list: [LocationResponse]
 }
+ */
 
 class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -48,7 +50,6 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     
     var foundLocations : [LocationResponse] = []
     var noLocations : [String] = []
-    //var allCities = [Location]()
     
     var localWeather : LocationResponse?
     
@@ -58,19 +59,16 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
         tableView.delegate = self
     }
     
-    // JSON QUERY
-    //On Search button press
     @IBAction func lookUpLocation(_ sender: Any) {
         if let safeString = textField.text!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             //let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(safeString)&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
             let url = URL(string: "http://api.openweathermap.org/data/2.5/find?q=\(safeString)&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
             let request = URLRequest(url: url)
-            let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, reponse: URLResponse?, error: Error?) in
+            let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
                 if let actualError = error {
                     print("Error: \(actualError).")
                 } else {
                     if let actualData = data {
-                        
                         let decoder = JSONDecoder()
                         do {
                             let weatherResponse = try decoder.decode(MultipleLocations.self, from: actualData)
@@ -78,6 +76,7 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
                             print(weatherResponse)
                             print("--------------")
                             print(weatherResponse.list[0].id)
+                            print(weatherResponse.list[0].main.temp)
                             //END TEST
                             for location in weatherResponse.list {
                                 self.foundLocations.append(location)
@@ -88,7 +87,6 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
                         } catch let error {
                             print("Error parsing JSON: \(error)")
                         }
-                        
                     } else {
                         print("No data received.")
                     }
@@ -117,27 +115,23 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
         return foundLocations.count
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selection: UITableViewCell = tableView.cellForRow(at: indexPath)!
         textField.text = selection.textLabel!.text
         //tableView.reloadData()
     }
 
+    /*
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "detailSegue", sender: self)
     }
+    */
     
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         if let destination = segue.destination as? DetailViewController {
             destination.localWeather = foundLocations[(tableView.indexPathForSelectedRow?.row)!]
         }
     }
-    
-
 }

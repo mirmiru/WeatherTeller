@@ -6,6 +6,7 @@
 //  Copyright © 2018 Milja V. All rights reserved.
 //
 
+/*
 import UIKit
 
 class SearchTableViewController: UITableViewController, UISearchResultsUpdating {
@@ -104,3 +105,4 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     */
 
 }
+ */

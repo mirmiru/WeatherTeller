@@ -34,3 +34,7 @@ struct LocationResponse : Codable {
     let id: Int
     let name: String
 }
+
+struct MultipleLocations : Codable {
+    let list: [LocationResponse]
+}

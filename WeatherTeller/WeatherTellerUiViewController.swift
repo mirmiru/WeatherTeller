@@ -13,45 +13,37 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
 
     @IBOutlet weak var tableView: UITableView!
     
-    var locations : [Weather] = []
-    //var locationsToDisplay : [Location] = []
+    var favorites : [Int] = []
+    var flag = 0
+    var favoriteLocations : [LocationResponse] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        locations = createArray()
-        // Do any additional setup after loading the view.
-        tableView.reloadData()
+        flag = 0
+        favorites = loadData()
+        if foundFavorites(array: favorites) {
+            print(favorites)
+            loadFavorites()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("VDA: Saved values: \(loadData().count)")
+        print("VDA: Favorites: \(favoriteLocations.count)")
+        
+        if loadData().count > favoriteLocations.count && flag>0 {
+            favorites = loadData()
+            loadFavorites()
+        }
+        flag += 1
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isTranslucent = true
     }
-    
-    //DUMMY DATA
-    func createArray() -> [Weather] {
-        var tempLocations: [Weather] = []
-        
-       // let loc1 = Location(weatherIcon: #imageLiteral(resourceName: "sun"), title: "Gothenburg", degrees: "19\u{00B0}")
-       // let loc2 = Location(weatherIcon: #imageLiteral(resourceName: "sun"), title: "Helsinki", degrees: "15°")
-        
-        //tempLocations.append(loc1)
-        //tempLocations.append(loc2)
-        
-        return tempLocations
-    }
-    
-    //Filter favorites
-    /*
-    func loadFavorites() {
-        for location is favoriteLocations where location.favorite == true {
-            locationsToDisplay.append(location)
-        }
-    }
-    */
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -59,21 +51,81 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //TODO: Return count of favorites array:
-        return locations.count
+        return loadData().count
+    }
+    
+    func foundFavorites(array: [Int]) -> Bool {
+        if array.count > 0 {
+            return true
+        } else {
+            return false
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let location = locations[indexPath.row]
-        //let location = locationsToDisplay[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellMain", for: indexPath) as! MainTableViewCell
-        
-        cell.setLocationInfo(location: location)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
+        if favoriteLocations.count > 0 {
+            print("Found favorites! \(favoriteLocations.count)")
+            cell.locationLabel.text = favoriteLocations[indexPath.row].name
+            cell.degreesLabel.text = String(favoriteLocations[indexPath.row].main.temp)
+        } else {
+            print("No favorites found.")
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //let selection: UITableViewCell = tableView.cellForRow(at: indexPath)!
+    }
+    
+    func loadFavorites() {
+        print(favorites)
+        for i in favorites {
+            getWeather(locationId: i)
+        }
+    }
+    
+    func getWeather(locationId: Int) {
+        if let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?id=\(locationId)&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
+            let request = URLRequest(url: url)
+            let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+                if let actualError = error {
+                    print("Error: \(actualError).")
+                } else {
+                    if let actualData = data {
+                        let decoder = JSONDecoder()
+                        do {
+                            let weatherResponse = try decoder.decode(LocationResponse.self, from: actualData)
+                            //TEST
+                            print("Found favorite: \(weatherResponse.name)")
+                            //END TEST
+                            self.favoriteLocations.append(weatherResponse)
+                            print(self.favoriteLocations.count)
+                            
+                            DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                            }
+                            
+                        } catch let error {
+                            print("Error parsing JSON: \(error)")
+                        }
+                    } else {
+                        print("No data received.")
+                    }
+                }
+            })
+            task.resume()
+        } else {
+            print("Bad URL string.")
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        //if let destination = segue.destination as? DetailViewController {
+            //destination.localWeather = favorites[tableView.indexPathForSelectedRow?.row]
+        //}
     }
 }

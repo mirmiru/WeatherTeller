@@ -6,6 +6,7 @@
 //  Copyright © 2018 Milja V. All rights reserved.
 //
 
+/*
 import UIKit
 
 class SearchTableViewCell: UITableViewCell {
@@ -24,3 +25,4 @@ class SearchTableViewCell: UITableViewCell {
     }
 
 }
+*/
