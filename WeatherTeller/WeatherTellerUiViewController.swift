@@ -67,7 +67,8 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
         if favoriteLocations.count > 0 {
             print("Found favorites! \(favoriteLocations.count)")
             cell.locationLabel.text = favoriteLocations[indexPath.row].name
-            cell.degreesLabel.text = String(favoriteLocations[indexPath.row].main.temp)
+            //cell.degreesLabel.text = String(format: "\(favoriteLocations[indexPath.row].main.temp) ℃")
+            cell.degreesLabel.text = String(format: "%.1f ℃", favoriteLocations[indexPath.row].main.temp)
         } else {
             print("No favorites found.")
         }
@@ -97,7 +98,7 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
                         do {
                             let weatherResponse = try decoder.decode(LocationResponse.self, from: actualData)
                             //TEST
-                            print("Found favorite: \(weatherResponse.name)")
+                            //print("Found favorite: \(weatherResponse.name)")
                             //END TEST
                             self.favoriteLocations.append(weatherResponse)
                             print(self.favoriteLocations.count)
@@ -124,8 +125,8 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
     // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        //if let destination = segue.destination as? DetailViewController {
-            //destination.localWeather = favorites[tableView.indexPathForSelectedRow?.row]
-        //}
+        if let destination = segue.destination as? DetailViewController {
+            destination.localWeather = favoriteLocations[(tableView.indexPathForSelectedRow?.row)!]
+        }
     }
 }

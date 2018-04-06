@@ -76,7 +76,6 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
                             print(weatherResponse)
                             print("--------------")
                             print(weatherResponse.list[0].id)
-                            print(weatherResponse.list[0].main.temp)
                             //END TEST
                             for location in weatherResponse.list {
                                 self.foundLocations.append(location)
@@ -107,7 +106,8 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath) as! TestTableViewCell
         cell.locationLabel.text = "\(foundLocations[indexPath.row].name), \(foundLocations[indexPath.row].sys.country)"
-        cell.temperatureLabel.text = "\(foundLocations[indexPath.row].main.temp) ℃"
+        //cell.temperatureLabel.text = "\(foundLocations[indexPath.row].main.temp) ℃"
+        cell.temperatureLabel.text = String(format: "%.1f ℃", foundLocations[indexPath.row].main.temp)
         return cell
     }
     
