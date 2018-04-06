@@ -24,6 +24,14 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var iconTextView: UITextView!
     
+    //DYNAMICS
+    var dynamicAnimator : UIDynamicAnimator!
+    var snap : UISnapBehavior!
+    var push : UIPushBehavior!
+    
+    @IBOutlet weak var bgViewSweater: UIView!
+    @IBOutlet weak var bgViewMitten: UIView!
+    @IBOutlet weak var bgViewUv: UIView!
     var localWeather : LocationResponse!
     var sweaterText : String!
     var mittenText : String!
@@ -33,7 +41,11 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         getUV(lat: localWeather.coord.lat, lon: localWeather.coord.lon)
         loadWeatherData()
+        dynamicAnimator = UIDynamicAnimator(referenceView: self.view)
+        
     }
+    
+    
     
     func loadWeatherData() {
         locationLabel.text = localWeather.name
@@ -68,16 +80,28 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction func sweaterClicked(_ sender: Any) {
+        dynamics(item: sweaterButton, snapDestination: bgViewSweater)
         iconTextView.text = sweaterText
     }
     
     @IBAction func mittenClicked(_ sender: Any) {
+        dynamics(item: mittenButton, snapDestination: bgViewMitten)
         iconTextView.text = mittenText
     }
     
     @IBAction func spfClicked(_ sender: Any) {
+        dynamics(item: spfButton, snapDestination: bgViewUv)
         //getUV(lat: localWeather.coord.lat, lon: localWeather.coord.lon)
         iconTextView.text = shouldWearSunblock(uv: uvIndex).spfRecText
+    }
+    
+    func dynamics(item: UIButton, snapDestination: UIView) {
+        snap = UISnapBehavior(item: item, snapTo: snapDestination.center)
+        dynamicAnimator.addBehavior(snap)
+        push = UIPushBehavior(items: [item], mode: .instantaneous)
+        push.pushDirection = CGVector(dx: 0, dy: -1)
+        push.magnitude = 3.0
+        dynamicAnimator.addBehavior(push)
     }
     
     override func didReceiveMemoryWarning() {
