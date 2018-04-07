@@ -48,6 +48,14 @@ struct UVResponse : Codable {
 struct MultipleLocations : Codable {
     let list: [LocationResponse]
 }
+
+func calculateRealFeel(location: LocationResponse) -> Double {
+    let temp = location.main.temp
+    let wind = location.wind.speed
+    let twc = 13.12+(0.6215 * temp) - 11.37 * pow(wind, 0.16) + 0.3965 * pow(temp, 0.16)
+    return twc
+}
+
 /*
 func getUV(lat: Double, lon: Double) {
     if let url = URL(string: "http://api.openweathermap.org/data/2.5/uvi?appid=7edad7684e284fcb9d65d40572da3930&lat=\(lat)&lon=\(lon)") {

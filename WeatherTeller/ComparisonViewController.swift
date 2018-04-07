@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import GraphKit
 
-class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, GKBarGraphDataSource {
 
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchTableview: UITableView!
@@ -16,7 +17,7 @@ class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableVi
     @IBOutlet weak var locationA: UILabel!
     @IBOutlet weak var locationB: UILabel!
     @IBOutlet weak var compareButton: UIButton!
-    @IBOutlet weak var graphView: UIView!
+    @IBOutlet weak var temperatureGraph: GKBarGraph!
     
     var responseArray = [LocationResponse]()
     var locAIsSet = false
@@ -29,6 +30,9 @@ class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableVi
         super.viewDidLoad()
         searchTextField.delegate = self
         searchTableview.delegate = self
+        
+        //Graph
+        temperatureGraph.dataSource = self
     }
     
     @IBAction func findLocation(_ sender: Any) {
@@ -80,6 +84,7 @@ class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableVi
     }
     
     @IBAction func compare(_ sender: Any) {
+        temperatureGraph.draw()
         if locAIsSet && locBIsSet {
             print("Can compare")
             print(locAData)
@@ -95,6 +100,51 @@ class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableVi
         let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
         alertController.addAction(defaultAction)
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: - GRAPH
+    func numberOfBars() -> Int {
+        return 6
+    }
+    
+    func valueForBar(at index: Int) -> NSNumber! {
+        switch index {
+        case 0:
+            return locAData.main.temp as! NSNumber
+        case 1:
+            return locBData.main.temp as! NSNumber
+        case 2:
+            return locAData.wind.speed as! NSNumber
+        case 3:
+            return locBData.wind.speed as! NSNumber
+        case 4:
+            return calculateRealFeel(location: locAData) as! NSNumber
+        case 5:
+            return calculateRealFeel(location: locBData) as! NSNumber
+        default:
+            return 0
+        }
+    }
+    
+    func titleForBar(at index: Int) -> String! {
+        switch index {
+        case 0...1:
+            return "TEMP"
+        case 2...3:
+            return "WIND"
+        case 4...5:
+            return "FEEL"
+        default:
+            return "?"
+        }
+    }
+    
+    func colorForBar(at index: Int) -> UIColor! {
+        if index%2==0 {
+            return UIColor.red
+        } else {
+            return UIColor.green
+        }
     }
     
     // MARK: - TABLE

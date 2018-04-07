@@ -51,21 +51,23 @@ class DetailViewController: UIViewController {
         temperatureLabel.text = String(format: "%.1f ℃", localWeather.main.temp)
         print(String(format: "%.1f ℃", localWeather.main.temp))
         windLabel.text = String("\(localWeather.wind.speed) m/s")
-        realfeelLabel.text = String(format: "%.1f ℃", calculateRealFeel())
+        realfeelLabel.text = String(format: "%.1f ℃", calculateRealFeel(location: localWeather))
         getRecommendations()
     }
     
-    func calculateRealFeel() -> Double {
+    /*
+    func calculateRealFeel(location: LocationResponse) -> Double {
         let temp = localWeather.main.temp
         let wind = localWeather.wind.speed
         let twc = 13.12+(0.6215 * temp) - 11.37 * pow(wind, 0.16) + 0.3965 * pow(temp, 0.16)
         return twc
     }
+ */
     
     func getRecommendations() {
         if shouldBringSweather(temp: localWeather.main.temp) {
             sweaterButton.setImage(#imageLiteral(resourceName: "sweater"), for: UIControlState.normal)
-            sweaterText = String(format: "The temperature feels like %.1f degrees, so you're going to need a sweater.", calculateRealFeel())
+            sweaterText = String(format: "The temperature feels like %.1f degrees, so you're going to need a sweater.", calculateRealFeel(location: localWeather))
         } else {
             sweaterText = "It's not that cold today - enjoy!"
         }
