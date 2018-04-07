@@ -110,17 +110,17 @@ class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableVi
     func valueForBar(at index: Int) -> NSNumber! {
         switch index {
         case 0:
-            return locAData.main.temp as! NSNumber
+            return locAData.main.temp*10 as! NSNumber
         case 1:
-            return locBData.main.temp as! NSNumber
+            return locBData.main.temp*10 as! NSNumber
         case 2:
-            return locAData.wind.speed as! NSNumber
+            return locAData.wind.speed*10 as! NSNumber
         case 3:
-            return locBData.wind.speed as! NSNumber
+            return locBData.wind.speed*10 as! NSNumber
         case 4:
-            return calculateRealFeel(location: locAData) as! NSNumber
+            return calculateRealFeel(location: locAData)*10 as! NSNumber
         case 5:
-            return calculateRealFeel(location: locBData) as! NSNumber
+            return calculateRealFeel(location: locBData)*10 as! NSNumber
         default:
             return 0
         }
@@ -141,9 +141,9 @@ class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableVi
     
     func colorForBar(at index: Int) -> UIColor! {
         if index%2==0 {
-            return UIColor.red
+            return UIColor(red:0.25, green:0.51, blue:0.54, alpha:1.0)
         } else {
-            return UIColor.green
+            return UIColor(red:0.91, green:0.34, blue:0.31, alpha:1.0)
         }
     }
     

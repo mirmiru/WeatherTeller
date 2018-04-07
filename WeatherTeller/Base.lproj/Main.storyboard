@@ -176,7 +176,7 @@
                                 <rect key="frame" x="158" y="331" width="150" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.25098039215686274" green="0.51372549019607838" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWa-MP-wZ3">
@@ -231,7 +231,7 @@
                                 <rect key="frame" x="158" y="362" width="150" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.90980392156862744" green="0.3411764705882353" blue="0.30980392156862746" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -259,7 +259,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rainBg" translatesAutoresizingMaskIntoConstraints="NO" id="Dc9-7u-krC">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wt_image" translatesAutoresizingMaskIntoConstraints="NO" id="Dc9-7u-krC">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Dc9-7u-krC" secondAttribute="height" multiplier="5:3" id="y4f-iS-S1M"/>
@@ -417,10 +417,10 @@
             </objects>
             <point key="canvasLocation" x="2616.8000000000002" y="571.66416791604206"/>
         </scene>
-        <!--Look up a city-->
+        <!--Location Look-up-->
         <scene sceneID="UaB-1y-yZV">
             <objects>
-                <viewController title="Look up a city" id="qaQ-4g-dPR" customClass="TestViewController" customModule="WeatherTeller" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Location Look-up" id="qaQ-4g-dPR" customClass="TestViewController" customModule="WeatherTeller" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JZA-lP-yUa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -537,7 +537,6 @@
     </scenes>
     <resources>
         <image name="mittenLight" width="50" height="50"/>
-        <image name="rainBg" width="1280" height="853"/>
         <image name="spfLight" width="50" height="50"/>
         <image name="sweaterLight" width="50" height="50"/>
         <image name="wt_image" width="375" height="344"/>
