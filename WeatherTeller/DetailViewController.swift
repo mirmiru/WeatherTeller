@@ -15,6 +15,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var windLabel: UILabel!
     @IBOutlet weak var realfeelLabel: UILabel!
+    @IBOutlet weak var descriptionView: UITextView!
     
     @IBOutlet weak var sweaterButton: UIButton!
     @IBOutlet weak var mittenButton: UIButton!
@@ -49,9 +50,10 @@ class DetailViewController: UIViewController {
     func loadWeatherData() {
         locationLabel.text = localWeather.name
         temperatureLabel.text = String(format: "%.1f ℃", localWeather.main.temp)
-        print(String(format: "%.1f ℃", localWeather.main.temp))
+        //print(String(format: "%.1f ℃", localWeather.main.temp))
         windLabel.text = String("\(localWeather.wind.speed) m/s")
         realfeelLabel.text = String(format: "%.1f ℃", calculateRealFeel(location: localWeather))
+        descriptionView.text = localWeather.weather[0].description
         getRecommendations()
     }
     

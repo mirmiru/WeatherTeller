@@ -30,8 +30,6 @@ class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableVi
         super.viewDidLoad()
         searchTextField.delegate = self
         searchTableview.delegate = self
-        
-        //Graph
         temperatureGraph.dataSource = self
     }
     
