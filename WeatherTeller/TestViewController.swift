@@ -25,6 +25,7 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     }
     
     @IBAction func lookUpLocation(_ sender: Any) {
+        foundLocations.removeAll()
         if let safeString = textField.text!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             //let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(safeString)&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
             let url = URL(string: "http://api.openweathermap.org/data/2.5/find?q=\(safeString)&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
@@ -71,7 +72,6 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath) as! TestTableViewCell
         cell.locationLabel.text = "\(foundLocations[indexPath.row].name), \(foundLocations[indexPath.row].sys.country)"
-        //cell.temperatureLabel.text = "\(foundLocations[indexPath.row].main.temp) ℃"
         cell.temperatureLabel.text = String(format: "%.1f ℃", foundLocations[indexPath.row].main.temp)
         return cell
     }
@@ -82,7 +82,8 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selection: UITableViewCell = tableView.cellForRow(at: indexPath)!
-        textField.text = selection.textLabel!.text
+        print(selection.textLabel?.text)
+        //textField.text = selection.textLabel!.text
         //tableView.reloadData()
     }
 

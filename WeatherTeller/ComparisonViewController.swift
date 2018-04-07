@@ -11,29 +11,29 @@ import UIKit
 class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var searchTextField: UITextField!
-    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchTableview: UITableView!
     
     @IBOutlet weak var locationA: UILabel!
     @IBOutlet weak var locationB: UILabel!
-    @IBOutlet weak var clearAButton: UIButton!
-    @IBOutlet weak var clearBButton: UIButton!
     @IBOutlet weak var compareButton: UIButton!
     @IBOutlet weak var graphView: UIView!
     
     var responseArray = [LocationResponse]()
+    var locAIsSet = false
+    var locBIsSet = false
+    
+    var locAData : LocationResponse!
+    var locBData : LocationResponse!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTextField.delegate = self
         searchTableview.delegate = self
-
-        // Do any additional setup after loading the view.
     }
     
-    func findLocation() {
+    @IBAction func findLocation(_ sender: Any) {
+        responseArray.removeAll()
         if let safeString = searchTextField.text!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-            //let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(safeString)&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
             let url = URL(string: "http://api.openweathermap.org/data/2.5/find?q=\(safeString)&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
             let request = URLRequest(url: url)
             let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
@@ -69,26 +69,61 @@ class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func resetA(_ sender: Any) {
+        locationA.text?.removeAll()
+        locAIsSet = false
+    }
+    
+    @IBAction func resetB(_ sender: Any) {
+        locationB.text?.removeAll()
+        locBIsSet = false
+    }
+    
+    @IBAction func compare(_ sender: Any) {
+        if locAIsSet && locBIsSet {
+            print("Can compare")
+            print(locAData)
+            print(locBData)
+        } else {
+            print("Choose two locations")
+            showAlert()
+        }
+    }
+    
+    func showAlert() {
+        let alertController = UIAlertController(title: "Error", message: "Please select two locations.", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: - TABLE
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return responseArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = searchTableview.dequeueReusableCell(withIdentifier: "comparisonCell", for: indexPath) as! TestTableViewCell
-        cell.locationLabel.text = String(indexPath.row)
+        let cell = searchTableview.dequeueReusableCell(withIdentifier: "comparisonCell", for: indexPath) as! ComparisonTableViewCell
+        cell.compLocationLabel.text = "\(responseArray[indexPath.row].name), \(responseArray[indexPath.row].sys.country)"
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return responseArray.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selection: UITableViewCell = searchTableview.cellForRow(at: indexPath)!
-        if locationA.text == nil {
-            locationA.text = responseArray[indexPath.row].name
-        } else if locationB == nil {
-            locationB.text = responseArray[indexPath.row].name
+        let selection = tableView.cellForRow(at: indexPath)! as UITableViewCell
+        let text = selection.textLabel?.text
+        if !locAIsSet {
+            locAData = responseArray[indexPath.row]
+            locationA.text = text
+            locAIsSet = true
+        } else {
+            locationB.text = text
+            locBData = responseArray[indexPath.row]
+            locBIsSet = true
         }
     }
 

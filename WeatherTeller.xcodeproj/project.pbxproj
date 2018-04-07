@@ -19,6 +19,7 @@
 		A5A049F52067A6340027F49C /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A049F42067A6340027F49C /* SearchTableViewController.swift */; };
 		A5A049FB2067CE1E0027F49C /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A049FA2067CE1E0027F49C /* SearchTableViewCell.swift */; };
 		A5A049FF2068E0250027F49C /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A049FE2068E0250027F49C /* TestViewController.swift */; };
+		A5A751592078F08D00342CF7 /* ComparisonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A751582078F08D00342CF7 /* ComparisonTableViewCell.swift */; };
 		A5C45926206ABBEC0076A318 /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C45925206ABBEC0076A318 /* TestTableViewCell.swift */; };
 		A5C6D84A207677BA00F2931E /* ClothingRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D849207677BA00F2931E /* ClothingRec.swift */; };
 		A5D04DC020780F8F00449068 /* ComparisonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D04DBF20780F8F00449068 /* ComparisonViewController.swift */; };
@@ -39,6 +40,7 @@
 		A5A049F42067A6340027F49C /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		A5A049FA2067CE1E0027F49C /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		A5A049FE2068E0250027F49C /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		A5A751582078F08D00342CF7 /* ComparisonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonTableViewCell.swift; sourceTree = "<group>"; };
 		A5C45925206ABBEC0076A318 /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
 		A5C6D849207677BA00F2931E /* ClothingRec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingRec.swift; sourceTree = "<group>"; };
 		A5D04DBF20780F8F00449068 /* ComparisonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				A596D5922074E03B00E47675 /* SavedData.swift */,
 				A5C6D849207677BA00F2931E /* ClothingRec.swift */,
 				A5D04DBF20780F8F00449068 /* ComparisonViewController.swift */,
+				A5A751582078F08D00342CF7 /* ComparisonTableViewCell.swift */,
 			);
 			path = WeatherTeller;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 				A5722FEC205AB08E007E910D /* AppDelegate.swift in Sources */,
 				A5A049FF2068E0250027F49C /* TestViewController.swift in Sources */,
 				A5A049F52067A6340027F49C /* SearchTableViewController.swift in Sources */,
+				A5A751592078F08D00342CF7 /* ComparisonTableViewCell.swift in Sources */,
 				A542AAFD205D9AF700742249 /* MainTableViewCell.swift in Sources */,
 				A58695CB206C04B300A011AF /* WeatherData.swift in Sources */,
 				A5C45926206ABBEC0076A318 /* TestTableViewCell.swift in Sources */,
