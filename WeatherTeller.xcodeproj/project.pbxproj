@@ -21,6 +21,7 @@
 		A5A049FF2068E0250027F49C /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A049FE2068E0250027F49C /* TestViewController.swift */; };
 		A5C45926206ABBEC0076A318 /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C45925206ABBEC0076A318 /* TestTableViewCell.swift */; };
 		A5C6D84A207677BA00F2931E /* ClothingRec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D849207677BA00F2931E /* ClothingRec.swift */; };
+		A5D04DC020780F8F00449068 /* ComparisonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D04DBF20780F8F00449068 /* ComparisonViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		A5A049FE2068E0250027F49C /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		A5C45925206ABBEC0076A318 /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
 		A5C6D849207677BA00F2931E /* ClothingRec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingRec.swift; sourceTree = "<group>"; };
+		A5D04DBF20780F8F00449068 /* ComparisonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				A58695C8206BFAD900A011AF /* DetailViewController.swift */,
 				A596D5922074E03B00E47675 /* SavedData.swift */,
 				A5C6D849207677BA00F2931E /* ClothingRec.swift */,
+				A5D04DBF20780F8F00449068 /* ComparisonViewController.swift */,
 			);
 			path = WeatherTeller;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 				A542AAFB205D981F00742249 /* WeatherTellerUiViewController.swift in Sources */,
 				A5C6D84A207677BA00F2931E /* ClothingRec.swift in Sources */,
 				A5A049FB2067CE1E0027F49C /* SearchTableViewCell.swift in Sources */,
+				A5D04DC020780F8F00449068 /* ComparisonViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,22 +16,24 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var windLabel: UILabel!
     @IBOutlet weak var realfeelLabel: UILabel!
     
-    @IBOutlet weak var umbrellaIcon: UIImageView!
-    
     @IBOutlet weak var sweaterButton: UIButton!
     @IBOutlet weak var mittenButton: UIButton!
     @IBOutlet weak var spfButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
     
     @IBOutlet weak var iconTextView: UITextView!
     
-    //DYNAMICS
+    //ANIMATIONS AND DYNAMICS
     var dynamicAnimator : UIDynamicAnimator!
     var snap : UISnapBehavior!
     var push : UIPushBehavior!
+    var isShowingText = false
     
     @IBOutlet weak var bgViewSweater: UIView!
     @IBOutlet weak var bgViewMitten: UIView!
     @IBOutlet weak var bgViewUv: UIView!
+    @IBOutlet weak var textBgView: UIView!
+    
     var localWeather : LocationResponse!
     var sweaterText : String!
     var mittenText : String!
@@ -42,10 +44,7 @@ class DetailViewController: UIViewController {
         getUV(lat: localWeather.coord.lat, lon: localWeather.coord.lon)
         loadWeatherData()
         dynamicAnimator = UIDynamicAnimator(referenceView: self.view)
-        
     }
-    
-    
     
     func loadWeatherData() {
         locationLabel.text = localWeather.name
@@ -82,19 +81,28 @@ class DetailViewController: UIViewController {
     @IBAction func sweaterClicked(_ sender: Any) {
         dynamics(item: sweaterButton, snapDestination: bgViewSweater)
         iconTextView.text = sweaterText
+        flipAnimation(isActive: true)
     }
     
     @IBAction func mittenClicked(_ sender: Any) {
         dynamics(item: mittenButton, snapDestination: bgViewMitten)
         iconTextView.text = mittenText
+        flipAnimation(isActive: true)
     }
     
     @IBAction func spfClicked(_ sender: Any) {
         dynamics(item: spfButton, snapDestination: bgViewUv)
-        //getUV(lat: localWeather.coord.lat, lon: localWeather.coord.lon)
         iconTextView.text = shouldWearSunblock(uv: uvIndex).spfRecText
+        flipAnimation(isActive: true)
     }
     
+    //ANIMATIONS
+    func flipAnimation(isActive: Bool) {
+        //iconTextView.isHidden = false
+        UIView.transition(with: textBgView, duration: 1, options: .transitionFlipFromRight, animations: nil, completion: nil)
+    }
+    
+    //DYNAMICS
     func dynamics(item: UIButton, snapDestination: UIView) {
         snap = UISnapBehavior(item: item, snapTo: snapDestination.center)
         dynamicAnimator.addBehavior(snap)
@@ -133,7 +141,6 @@ class DetailViewController: UIViewController {
                                     self.spfButton.setImage(#imageLiteral(resourceName: "spf"), for: UIControlState.normal)
                                 }
                             }
-                            
                         } catch let error {
                             print("Error parsing JSON: \(error)")
                         }

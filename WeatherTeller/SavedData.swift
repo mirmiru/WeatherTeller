@@ -12,7 +12,6 @@ var favoriteIds : [Int]?
 var savedData = UserDefaults.standard.array(forKey: "savedData") as? [Int]
 
 func saveData(id: Int) {
-    print(savedData)
     if isNewFavorite(id: id) {
         favoriteIds = loadData()
         favoriteIds?.append(id)
