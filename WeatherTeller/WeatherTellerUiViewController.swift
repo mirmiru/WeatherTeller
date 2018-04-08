@@ -54,7 +54,7 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
             cell.locationLabel.text = favoriteLocations![indexPath.row].name
             cell.degreesLabel.text = String(format: "%.1f ℃", favoriteLocations![indexPath.row].main.temp)
         } else {
-            print("No favorites found.")
+            print("")
         }
         return cell
     }
