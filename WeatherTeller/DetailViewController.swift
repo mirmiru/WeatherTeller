@@ -50,21 +50,11 @@ class DetailViewController: UIViewController {
     func loadWeatherData() {
         locationLabel.text = localWeather.name
         temperatureLabel.text = String(format: "%.1f ℃", localWeather.main.temp)
-        //print(String(format: "%.1f ℃", localWeather.main.temp))
         windLabel.text = String("\(localWeather.wind.speed) m/s")
         realfeelLabel.text = String(format: "%.1f ℃", calculateRealFeel(location: localWeather))
         descriptionView.text = localWeather.weather[0].description
         getRecommendations()
     }
-    
-    /*
-    func calculateRealFeel(location: LocationResponse) -> Double {
-        let temp = localWeather.main.temp
-        let wind = localWeather.wind.speed
-        let twc = 13.12+(0.6215 * temp) - 11.37 * pow(wind, 0.16) + 0.3965 * pow(temp, 0.16)
-        return twc
-    }
- */
     
     func getRecommendations() {
         if shouldBringSweather(temp: localWeather.main.temp) {
@@ -73,7 +63,6 @@ class DetailViewController: UIViewController {
         } else {
             sweaterText = "It's not that cold today - enjoy!"
         }
-        
         if shouldBringMittens(temp: localWeather.main.temp) {
             mittenButton.setImage(#imageLiteral(resourceName: "mitten"), for: UIControlState.normal)
             mittenText = "You should bring a pair of mittens to keep your hands warm!"
@@ -102,7 +91,6 @@ class DetailViewController: UIViewController {
     
     //ANIMATIONS
     func flipAnimation(isActive: Bool) {
-        //iconTextView.isHidden = false
         UIView.transition(with: textBgView, duration: 1, options: .transitionFlipFromRight, animations: nil, completion: nil)
     }
     
@@ -118,13 +106,19 @@ class DetailViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func addToFavorites(_ sender: Any) {
-        let id = localWeather.id
-        saveData(id: id)
-        print("Saved to favorites")
+        if !saveData(id: localWeather.id) {
+            showAlert()
+        }
+    }
+    
+    func showAlert() {
+        let alertController = UIAlertController(title: "Error", message: "Location already saved.", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     func getUV(lat: Double, lon: Double) {
@@ -158,15 +152,4 @@ class DetailViewController: UIViewController {
             print("Bad URL string.")
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

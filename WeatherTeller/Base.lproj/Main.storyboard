@@ -70,6 +70,7 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="yRX-tM-TMA" secondAttribute="bottom" constant="12" id="wwC-uy-Z9Z"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.93809109810000002" green="0.93809109810000002" blue="0.93809109810000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="degreesLabel" destination="yRX-tM-TMA" id="CWM-Ha-Xxd"/>
                                             <outlet property="locationLabel" destination="GbM-dc-TOt" id="ayw-Sa-gMe"/>
@@ -107,13 +108,13 @@
                     <navigationItem key="navigationItem" id="Jhl-gs-j9r">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="ktN-1q-O2d">
-                                <color key="tintColor" red="0.2784313725" green="0.40000000000000002" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.27309510110532653" green="0.37722779489415309" blue="0.43077807741116747" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="qaQ-4g-dPR" kind="show" identifier="addSegue" id="v81-qq-9wr"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="COMPARE" id="Tmz-P2-Uv4">
-                                <color key="tintColor" red="0.2784313725" green="0.40000000000000002" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.049642242932994615" green="0.06857110859704163" blue="0.078305285896746679" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="gJ2-oX-BOf" kind="show" id="AAi-aR-MZm"/>
                                 </connections>
@@ -536,6 +537,6 @@
         <image name="wt_image" width="375" height="344"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AbY-SJ-dyp"/>
+        <segue reference="iDX-vi-eDy"/>
     </inferredMetricsTieBreakers>
 </document>

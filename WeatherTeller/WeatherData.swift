@@ -55,31 +55,3 @@ func calculateRealFeel(location: LocationResponse) -> Double {
     let twc = 13.12+(0.6215 * temp) - 11.37 * pow(wind, 0.16) + 0.3965 * pow(temp, 0.16)
     return twc
 }
-
-/*
-func getUV(lat: Double, lon: Double) {
-    if let url = URL(string: "http://api.openweathermap.org/data/2.5/uvi?appid=7edad7684e284fcb9d65d40572da3930&lat=\(lat)&lon=\(lon)") {
-        let request = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
-            if let actualError = error {
-                print("Error: \(actualError).")
-            } else {
-                if let actualData = data {
-                    let decoder = JSONDecoder()
-                    do {
-                        let uvResponse = try decoder.decode(UVResponse.self, from: actualData)
-                        print("UV Index: \(uvResponse.value)")
-                    } catch let error {
-                        print("Error parsing JSON: \(error)")
-                    }
-                } else {
-                    print("No data received.")
-                }
-            }
-        })
-        task.resume()
-    } else {
-        print("Bad URL string.")
-    }
-}
-*/

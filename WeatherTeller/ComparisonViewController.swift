@@ -82,13 +82,9 @@ class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableVi
     }
     
     @IBAction func compare(_ sender: Any) {
-        temperatureGraph.draw()
         if locAIsSet && locBIsSet {
-            print("Can compare")
-            print(locAData)
-            print(locBData)
+            temperatureGraph.draw()
         } else {
-            print("Choose two locations")
             showAlert()
         }
     }
@@ -101,6 +97,7 @@ class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableVi
     }
     
     // MARK: - GRAPH
+    
     func numberOfBars() -> Int {
         return 6
     }
@@ -108,17 +105,17 @@ class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableVi
     func valueForBar(at index: Int) -> NSNumber! {
         switch index {
         case 0:
-            return locAData.main.temp*10 as! NSNumber
+            return locAData.main.temp*10 as NSNumber
         case 1:
-            return locBData.main.temp*10 as! NSNumber
+            return locBData.main.temp*10 as NSNumber
         case 2:
-            return locAData.wind.speed*10 as! NSNumber
+            return locAData.wind.speed*10 as NSNumber
         case 3:
-            return locBData.wind.speed*10 as! NSNumber
+            return locBData.wind.speed*10 as NSNumber
         case 4:
-            return calculateRealFeel(location: locAData)*10 as! NSNumber
+            return calculateRealFeel(location: locAData)*10 as NSNumber
         case 5:
-            return calculateRealFeel(location: locBData)*10 as! NSNumber
+            return calculateRealFeel(location: locBData)*10 as NSNumber
         default:
             return 0
         }
@@ -174,15 +171,4 @@ class ComparisonViewController: UIViewController, UITextFieldDelegate, UITableVi
             locBIsSet = true
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

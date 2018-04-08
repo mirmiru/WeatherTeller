@@ -9,9 +9,10 @@
 import Foundation
 
 func shouldBringSweather(temp: Double) -> Bool {
-    if temp < 10.0 {
+    switch temp {
+    case 0...10:
         return true
-    } else {
+    default:
         return false
     }
 }
@@ -26,21 +27,21 @@ func shouldBringMittens(temp: Double) -> Bool {
 
 func shouldWearSunblock(uv: Double) -> (shouldWear: Bool, spfRecText: String) {
     switch uv {
-    case 0...2.9:
-        let text = "Low UV Index. If you burn easily, wear SPF 30+."
+    case 0...2.99:
+        let text = String(format: "%.1f: Low UV index. If you burn easily, wear SPF 30+.", uv)
         return (shouldWear: true, spfRecText: text)
-    case 3...5.9:
+    case 3...5.99:
         print("UV 3-5")
-        let text = "Moderate UV Index. Stay in the shade during midday. Apply SPF 30+ every 2 hours. Wear protective clothing and sunglasses."
+        let text = String(format: "%.1f: Moderate UV index. Stay in the shade during midday. Apply SPF 30+ every 2 hours. Wear protective clothing and sunglasses.", uv)
         return (shouldWear: true, spfRecText: text)
-    case 6...7.9:
-        let text = "High UV Index. Apply SPF 30+ even if cloudy. Avoid being in the sun between 10 AM-4 PM."
+    case 6...7.99:
+        let text = String(format: "%.1f: High UV index. Apply SPF 30+ even if cloudy. Avoid being in the sun between 10 AM-4 PM.", uv)
         return (shouldWear: true, spfRecText: text)
-    case 8...10.9:
-        let text = "Very high UV Index. Apply SPF 30+ even if cloudy every 2 hours. Minimize sun exposure 10 AM-4 PM."
+    case 8...10.99:
+        let text = String(format: "%.1f: Very high UV index. Apply SPF 30+ even if cloudy every 2 hours. Minimize sun exposure 10 AM-4 PM.", uv)
         return (shouldWear: true, spfRecText: text)
     case 11...:
-        let text = "Extreme UV Index. Avoid sun exposure 10 AM-4 PM. Generously pply SPF 30+ even if cloudy every 2 hours"
+        let text = String(format: "%.1f: Extreme UV index. Avoid sun exposure 10 AM-4 PM. Generously pply SPF 30+ even if cloudy every 2 hours.", uv)
         return (shouldWear: true, spfRecText: text)
     default:
         let text = "No recommendation"

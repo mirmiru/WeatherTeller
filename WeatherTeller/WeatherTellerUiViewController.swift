@@ -8,34 +8,20 @@
 
 import UIKit
 
-
 class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var favorites : [Int] = []
-    var flag = 0
-    var favoriteLocations : [LocationResponse] = []
+    var favoriteLocations : [LocationResponse]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        flag = 0
-        favorites = loadData()
-        if foundFavorites(array: favorites) {
-            print(favorites)
-            loadFavorites()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("VDA: Saved values: \(loadData().count)")
-        print("VDA: Favorites: \(favoriteLocations.count)")
-        
-        if loadData().count > favoriteLocations.count && flag>0 {
-            favorites = loadData()
+        if loadData().count > 0 {
             loadFavorites()
         }
-        flag += 1
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,25 +50,19 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell", for: indexPath) as! MainTableViewCell
-        if favoriteLocations.count > 0 {
-            print("Found favorites! \(favoriteLocations.count)")
-            cell.locationLabel.text = favoriteLocations[indexPath.row].name
-            //cell.degreesLabel.text = String(format: "\(favoriteLocations[indexPath.row].main.temp) ℃")
-            cell.degreesLabel.text = String(format: "%.1f ℃", favoriteLocations[indexPath.row].main.temp)
+        if favoriteLocations?.count != nil && favoriteLocations?.count == loadData().count {
+            cell.locationLabel.text = favoriteLocations![indexPath.row].name
+            cell.degreesLabel.text = String(format: "%.1f ℃", favoriteLocations![indexPath.row].main.temp)
         } else {
             print("No favorites found.")
         }
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let selection: UITableViewCell = tableView.cellForRow(at: indexPath)!
-    }
-    
+ 
     func loadFavorites() {
-        print(favorites)
-        for i in favorites {
-            getWeather(locationId: i)
+        favoriteLocations = []
+        for id in loadData() {
+            getWeather(locationId: id)
         }
     }
     
@@ -97,16 +77,10 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
                         let decoder = JSONDecoder()
                         do {
                             let weatherResponse = try decoder.decode(LocationResponse.self, from: actualData)
-                            //TEST
-                            //print("Found favorite: \(weatherResponse.name)")
-                            //END TEST
-                            self.favoriteLocations.append(weatherResponse)
-                            print(self.favoriteLocations.count)
-                            
+                            self.favoriteLocations!.append(weatherResponse)
                             DispatchQueue.main.async {
                                     self.tableView.reloadData()
                             }
-                            
                         } catch let error {
                             print("Error parsing JSON: \(error)")
                         }
@@ -122,11 +96,8 @@ class WeatherTellerUiViewController: UIViewController, UITableViewDelegate, UITa
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
         if let destination = segue.destination as? DetailViewController {
-            destination.localWeather = favoriteLocations[(tableView.indexPathForSelectedRow?.row)!]
+            destination.localWeather = favoriteLocations![(tableView.indexPathForSelectedRow?.row)!]
         }
     }
 }

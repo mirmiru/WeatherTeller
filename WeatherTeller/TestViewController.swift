@@ -14,7 +14,7 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     @IBOutlet weak var tableView: UITableView!
     
     var foundLocations : [LocationResponse] = []
-    var noLocations : [String] = []
+    //var noLocations : [String] = []
     
     var localWeather : LocationResponse?
     
@@ -27,7 +27,6 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
     @IBAction func lookUpLocation(_ sender: Any) {
         foundLocations.removeAll()
         if let safeString = textField.text!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-            //let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(safeString)&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
             let url = URL(string: "http://api.openweathermap.org/data/2.5/find?q=\(safeString)&units=metric&APPID=7edad7684e284fcb9d65d40572da3930") {
             let request = URLRequest(url: url)
             let task = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
@@ -38,11 +37,6 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
                         let decoder = JSONDecoder()
                         do {
                             let weatherResponse = try decoder.decode(MultipleLocations.self, from: actualData)
-                            //TEST
-                            print(weatherResponse)
-                            print("--------------")
-                            print(weatherResponse.list[0].id)
-                            //END TEST
                             for location in weatherResponse.list {
                                 self.foundLocations.append(location)
                                 DispatchQueue.main.async {
@@ -80,12 +74,14 @@ class TestViewController: UIViewController, UITextFieldDelegate, UITableViewDele
         return foundLocations.count
     }
     
+    /*
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selection: UITableViewCell = tableView.cellForRow(at: indexPath)!
-        print(selection.textLabel?.text)
+        //print(selection.textLabel?.text)
         //textField.text = selection.textLabel!.text
         //tableView.reloadData()
     }
+ */
 
     /*
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

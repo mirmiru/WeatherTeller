@@ -17,8 +17,6 @@
 		A58695C9206BFAD900A011AF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58695C8206BFAD900A011AF /* DetailViewController.swift */; };
 		A58695CB206C04B300A011AF /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58695CA206C04B300A011AF /* WeatherData.swift */; };
 		A596D5932074E03B00E47675 /* SavedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A596D5922074E03B00E47675 /* SavedData.swift */; };
-		A5A049F52067A6340027F49C /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A049F42067A6340027F49C /* SearchTableViewController.swift */; };
-		A5A049FB2067CE1E0027F49C /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A049FA2067CE1E0027F49C /* SearchTableViewCell.swift */; };
 		A5A049FF2068E0250027F49C /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A049FE2068E0250027F49C /* TestViewController.swift */; };
 		A5A751592078F08D00342CF7 /* ComparisonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A751582078F08D00342CF7 /* ComparisonTableViewCell.swift */; };
 		A5C45926206ABBEC0076A318 /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C45925206ABBEC0076A318 /* TestTableViewCell.swift */; };
@@ -41,8 +39,6 @@
 		A58695C8206BFAD900A011AF /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A58695CA206C04B300A011AF /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		A596D5922074E03B00E47675 /* SavedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedData.swift; sourceTree = "<group>"; };
-		A5A049F42067A6340027F49C /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
-		A5A049FA2067CE1E0027F49C /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		A5A049FE2068E0250027F49C /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		A5A751582078F08D00342CF7 /* ComparisonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonTableViewCell.swift; sourceTree = "<group>"; };
 		A5C45925206ABBEC0076A318 /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
@@ -103,8 +99,6 @@
 				A5722FEB205AB08E007E910D /* AppDelegate.swift */,
 				A542AAFA205D981F00742249 /* WeatherTellerUiViewController.swift */,
 				A542AAFC205D9AF700742249 /* MainTableViewCell.swift */,
-				A5A049F42067A6340027F49C /* SearchTableViewController.swift */,
-				A5A049FA2067CE1E0027F49C /* SearchTableViewCell.swift */,
 				A5722FEF205AB08E007E910D /* Main.storyboard */,
 				A5722FF2205AB08E007E910D /* Assets.xcassets */,
 				A5722FF4205AB08E007E910D /* LaunchScreen.storyboard */,
@@ -257,7 +251,6 @@
 				A58695C9206BFAD900A011AF /* DetailViewController.swift in Sources */,
 				A5722FEC205AB08E007E910D /* AppDelegate.swift in Sources */,
 				A5A049FF2068E0250027F49C /* TestViewController.swift in Sources */,
-				A5A049F52067A6340027F49C /* SearchTableViewController.swift in Sources */,
 				A5A751592078F08D00342CF7 /* ComparisonTableViewCell.swift in Sources */,
 				A542AAFD205D9AF700742249 /* MainTableViewCell.swift in Sources */,
 				A58695CB206C04B300A011AF /* WeatherData.swift in Sources */,
@@ -265,7 +258,6 @@
 				A596D5932074E03B00E47675 /* SavedData.swift in Sources */,
 				A542AAFB205D981F00742249 /* WeatherTellerUiViewController.swift in Sources */,
 				A5C6D84A207677BA00F2931E /* ClothingRec.swift in Sources */,
-				A5A049FB2067CE1E0027F49C /* SearchTableViewCell.swift in Sources */,
 				A5D04DC020780F8F00449068 /* ComparisonViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
